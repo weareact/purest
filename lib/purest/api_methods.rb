@@ -87,6 +87,9 @@ module Purest
         # Base URL + appended path
         url += "/#{appended_path}" if appended_path
 
+        # Remove name from options as it will cause a bad response when calling update with it present, unless updating only the name.
+        @options.delete(:name)
+
         # Since :name and :new_name are used the same throughout almost every class
         # it seems reasonable to do this here
         @options[:name] = @options.delete(:new_name) if !@options.nil? && @options[:new_name]
